@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Tools - Multi Utility</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #2c3e50, #4ca1af);
+            color: white;
+            padding: 20px;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 500px;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            display: none;
+        }
+
+        h1 { color: #2c3e50; }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            color: white;
+        }
+
+        .btn:hover { transform: scale(1.05); }
+
+        .pdf-btn { background: #e74c3c; }
+        .text-btn { background: #3498db; }
+        .jpg-btn { background: #2ecc71; }
+        .back-btn { background: #8e44ad; margin-top: 20px; }
+
+        .icon { font-size: 1.2rem; }
+
+        /* Upload Box */
+        .upload-box {
+            margin-top: 20px;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .file-label {
+            display: block;
+            background: #3498db;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        /* Download Button */
+        .download-btn {
+            display: none;
+            background: #27ae60;
+            color: white;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .download-btn:hover { background: #219150; }
+
+    </style>
+</head>
+<body>
+
+    <!-- Tool Selection -->
+    <div id="toolSelection" class="container" style="display: block;">
+        <h1>🖼️ Image Tools</h1>
+        <button class="btn pdf-btn" onclick="showTool('imgToPdf')">📄 Convert Image to PDF</button>
+        <button class="btn text-btn" onclick="showTool('imgToText')">📝 Extract Text from Image</button>
+        <button class="btn jpg-btn" onclick="showTool('jpgToPng')">📸 Convert JPG to PNG</button>
+    </div>
+
+    <!-- Image to PDF Tool -->
+    <div id="imgToPdf" class="container">
+        <h1>📄 Convert Image to PDF</h1>
+        <label class="file-label" for="pdfInput">Upload Image</label>
+        <input type="file" id="pdfInput" accept="image/*">
+        <button class="btn pdf-btn" onclick="convertToPDF()">Convert to PDF</button>
+        <a id="downloadPdfBtn" class="download-btn" download="converted.pdf">⬇️ Download PDF</a>
+        <button class="btn back-btn" onclick="goBack()">🔙 Back</button>
+    </div>
+
+    <!-- Image to Text Tool -->
+    <div id="imgToText" class="container">
+        <h1>📝 Extract Text from Image</h1>
+        <label class="file-label" for="textInput">Upload Image</label>
+        <input type="file" id="textInput" accept="image/*">
+        <button class="btn text-btn" onclick="extractText()">Extract Text</button>
+        <textarea id="textOutput" rows="6" readonly></textarea>
+        <a id="downloadTextBtn" class="download-btn" download="extracted-text.txt">⬇️ Download Text</a>
+        <button class="btn back-btn" onclick="goBack()">🔙 Back</button>
+    </div>
+
+    <!-- JPG to PNG Tool -->
+    <div id="jpgToPng" class="container">
+        <h1>📸 Convert JPG to PNG</h1>
+        <label class="file-label" for="jpgInput">Upload JPG</label>
+        <input type="file" id="jpgInput" accept="image/jpeg">
+        <button class="btn jpg-btn" onclick="convertJPGtoPNG()">Convert to PNG</button>
+        <a id="downloadPngBtn" class="download-btn" download="converted.png">⬇️ Download PNG</a>
+        <button class="btn back-btn" onclick="goBack()">🔙 Back</button>
+    </div>
+
+<script>
+    function showTool(toolId) {
+        document.getElementById("toolSelection").style.display = "none";
+        document.getElementById(toolId).style.display = "block";
+    }
+
+    function goBack() {
+        document.querySelectorAll('.container').forEach(el => el.style.display = 'none');
+        document.getElementById("toolSelection").style.display = "block";
+    }
+</script>
+
+</body>
+</html>
